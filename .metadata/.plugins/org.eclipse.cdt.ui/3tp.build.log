@@ -1,0 +1,9 @@
+19:48:00 **** Incremental Build of configuration Debug for project 3tp ****
+Info: Internal Builder is used for build
+gcc -o 3tp.exe "src\\Controller.o" "src\\Employee.o" "src\\main.o" "src\\parser.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\main.o: in function `main':
+C:\Users\soyde\Desktop\trabajoenclase_22\3tp\Debug/../src/main.c:27: undefined reference to `ll_newLinkedList'
+collect2.exe: error: ld returned 1 exit status
+
+19:48:00 Build Failed. 2 errors, 0 warnings. (took 415ms)
+

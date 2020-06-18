@@ -11,94 +11,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int initArray(int* pArray, int limite, int valor)
+void sumar(int parametroA, int parametroB, int* pResultado)
 {
-	int retorno=-1;
-	int i;
-	if(pArray != NULL && limite > 0)
-	{
-		retorno = 0;
-		for(i=0;i<limite;i++)
-		{
-			*(pArray+i) = valor; // pArray[i] = valor;
-		}
-	}
-	return retorno;
+	*pResultado = parametroA + parametroB;
 }
 
-int imprimirArray(int* pArray, int limite)
+void restar(int parametroA, int parametroB, int* pResultado)
 {
-	int retorno=-1;
-	int i;
-	if(pArray != NULL && limite > 0)
-	{
-		retorno = 0;
-		for(i=0;i<limite;i++)
-		{
-			printf("%d\n",*(pArray+i));
-		}
-	}
-	return retorno;
+	*pResultado = parametroA - parametroB;
 }
 
-int resizeArray(int** pArray, int* sizeActual,int sizeNuevo)
+int calcular(int parametroA, int parametroB, void(*pFuncion)(int,int,int*))
 {
-	int* pArrayTemp = NULL;
-	int retorno=-1;
-	if(pArray != NULL && sizeActual != NULL && sizeNuevo >= 0)
-	{
-		pArrayTemp = (int*)realloc(*pArray,sizeof(int) * sizeNuevo);
-		if(pArrayTemp != NULL)
-		{
-			*sizeActual = sizeNuevo;
-			*pArray = NULL;
-			pArrayTemp = NULL;
-			retorno = 0;
-		}
-	}
-	return retorno;
+	int auxResultado;
+	pFuncion(parametroA,parametroB,&auxResultado);
+	return auxResultado;
 }
 
-int resizeArrayError(int* pArray, int* sizeActual,int sizeNuevo)
-{
-	int* pArrayTemp = NULL;
-	int retorno=-1;
-	if(pArray != NULL && sizeActual != NULL && sizeNuevo >= 0)
-	{
-		pArrayTemp = (int*)realloc(pArray,sizeof(int) * sizeNuevo);
-		if(pArrayTemp != NULL)
-		{
-			*sizeActual = sizeNuevo;
-			pArray = NULL;
-			pArrayTemp = NULL;
-			retorno = 0;
-		}
-	}
-	return retorno;
-}
 
 int main(void)
 {
-	int* pArrayEdades = NULL;
-	int sizeArrayEdades = 10;
+	int auxiliar;
 
+	auxiliar = calcular(10,5,restar);
+	printf("El resultado de la resta es: %d\n", auxiliar);
 
-	pArrayEdades = (int*) malloc(sizeof(int) * sizeArrayEdades);
-	if(pArrayEdades != NULL)
-	{
-		if(!initArray(pArrayEdades,sizeArrayEdades,0))
-		{
-			printf("INIT OK\n");
-			imprimirArray(pArrayEdades,sizeArrayEdades);
-		}
-		if(!resizeArray(&pArrayEdades,&sizeArrayEdades,25))
-		{
-			printf("RESIZE OK\n");
-			imprimirArray(pArrayEdades,sizeArrayEdades);
-		}
+	auxiliar = calcular(10,5,sumar);
+	printf("El resultado de la suma es: %d\n", auxiliar);
 
-	}
-	free(pArrayEdades);
-
-	return EXIT_SUCCESS;
+	return 0;
 }

@@ -1,0 +1,52 @@
+20:15:42 **** Incremental Build of configuration Debug for project tp ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Controller.o" "..\\src\\Controller.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\tp.o" "..\\src\\tp.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn.o" "..\\src\\utn.c" 
+..\src\utn.c: In function 'getString':
+..\src\utn.c:31:3: warning: implicit declaration of function '__fpurge' [-Wimplicit-function-declaration]
+   31 |   __fpurge(stdin);
+      |   ^~~~~~~~
+gcc -o tp.exe "src\\Controller.o" "src\\Employee.o" "src\\main.o" "src\\parser.o" "src\\tp.o" "src\\utn.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\tp.o: in function `main':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/tp.c:14: multiple definition of `main'; src\main.o:C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/main.c:26: first defined here
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_addEmployee':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:95: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:107: undefined reference to `ll_add'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_editEmployee':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:137: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:140: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_removeEmployee':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:184: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:187: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:195: undefined reference to `ll_remove'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_ListEmployee':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:224: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:222: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_sortEmployee':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:252: undefined reference to `ll_sort'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_saveAsText':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:290: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:288: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_saveAsBinary':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:328: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:336: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `controller_buscarPorIdArray':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:371: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:369: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\Controller.o: in function `idMaximoEncontrado':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:407: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:411: undefined reference to `ll_get'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/Controller.c:405: undefined reference to `ll_len'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\main.o: in function `main':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/main.c:29: undefined reference to `ll_newLinkedList'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\parser.o: in function `parser_EmployeeFromText':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/parser.c:36: undefined reference to `ll_add'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\parser.o: in function `parser_EmployeeFromBinary':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/parser.c:86: undefined reference to `ll_add'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\utn.o: in function `getString':
+C:\Users\soyde\Desktop\trabajoenclase_22\tp\Debug/../src/utn.c:31: undefined reference to `__fpurge'
+collect2.exe: error: ld returned 1 exit status
+
+20:15:44 Build Failed. 38 errors, 1 warnings. (took 2s.156ms)
+

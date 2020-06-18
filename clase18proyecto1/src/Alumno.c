@@ -12,7 +12,6 @@
 
 static int isValidNombre(char* cadena,int longitud);
 static int esNumerica(char* cadena, int limite);
-static int isValidNumFloat(char* cadena, int limite);
 
 Alumno* alumno_new(void)
 {
@@ -103,20 +102,27 @@ int alumno_getIdTxt(Alumno* this,char* id)
 	return retorno;
 }
 
-int alumno_setAltura(Alumno* this,char* altura)
+int alumno_setAltura(Alumno* this,float altura)
 {
 	int retorno = -1;
-	if(this != NULL && altura != NULL)
+	if(this != NULL && altura >= 0)
 	{
-		if(isValidNumFloat)(nombre,NOMBRE_LEN))
-		{
-			retorno = 0;
-			strncpy(this->nombre,nombre,NOMBRE_LEN);
-		}
+		retorno = 0;
+		this->altura = altura;
 	}
 	return retorno;
 }
 
+int alumno_getAltura(Alumno* this,float* altura)
+{
+	int retorno = -1;
+	if(this != NULL && altura != NULL)
+	{
+		retorno = 0;
+		*altura = this->altura;
+	}
+	return retorno;
+}
 /**********************************************************************/
 
 /**
@@ -150,7 +156,7 @@ static int isValidNombre(char* cadena,int longitud)
  * \return Retorna 1 (verdadero) si la cadena es numerica, 0 (falso) si no lo es y -1 en caso de error
  *
  */
-static int isValidNumFloat(char* cadena, int limite)
+static int esNumerica(char* cadena, int limite)
 {
 	int retorno = -1; // ERROR
 	int i;
@@ -174,8 +180,6 @@ static int isValidNumFloat(char* cadena, int limite)
 	}
 	return retorno;
 }
-
-
 
 /**********************************************************************/
 
@@ -299,20 +303,98 @@ int alumno_borrarPorIdArray(Alumno* arrayPunteros[],int limite, int id)
 	return retorno;
 }
 
-int alumno_modificarArray(Alumno* arrayPunteros[], int limite, int indice)
-{
-	int respuesta = -1;
-	Alumno* bufferAlumno;
 
-	if(arrayPunteros != NULL && limite > 0 && indice < limite && indice >= 0 && arrayPunteros[indice] != NULL)
+int alumno_ordenarArray(Alumno* arrayPunteros[],int limite)
+{
+	int retorno=-1;
+	int i;
+	int flagSwap;
+	Alumno* bufferPunteroAlumno;
+	if(arrayPunteros != NULL && limite > 0)
 	{
-		if(	!utn_getNombre(bufferAlumno->nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) &&
-			!utn_getNumeroFlotante(&bufferAlumno->altura,"\nAltura?\n","\nError\n",0,3,1) )
+		retorno=0;
+		do
 		{
-			respuesta = 0;
-			bufferAlumno->id = arrayPunteros[indice]->id;
-			arrayPunteros[indice] = bufferAlumno;
-		}
+			flagSwap = 0;
+			for(i=0;i<limite-1;i++)
+			{
+
+				if(	arrayPunteros[i] != NULL &&
+					arrayPunteros[i+1] != NULL &&
+					strncmp(arrayPunteros[i]->nombre,arrayPunteros[i+1]->nombre,NOMBRE_LEN) > 0)
+				{
+					bufferPunteroAlumno = arrayPunteros[i];
+					arrayPunteros[i] = arrayPunteros[i+1];
+					arrayPunteros[i+1] = bufferPunteroAlumno;
+					flagSwap=1;
+				}
+			}
+		}while(flagSwap);
 	}
-	return respuesta;
+	return retorno;
 }
+
+int alumno_calcularAlturaPromedioArray(Alumno* arrayPunteros[],int limite, float* promedio)
+{
+	int retorno=-1;
+	int i;
+	int cantidadAlumnos = 0;
+	float acumuladorAlturas=0;
+	if(arrayPunteros != NULL && limite > 0 && promedio != NULL)
+	{
+		retorno=0;
+		for(i=0;i<limite;i++)
+		{
+			if(arrayPunteros[i] != NULL)
+			{
+				cantidadAlumnos++;
+				acumuladorAlturas = acumuladorAlturas + arrayPunteros[i]->altura;
+			}
+		}
+		*promedio = acumuladorAlturas / cantidadAlumnos;
+	}
+	return retorno;
+}
+
+int alumno_calcularAlturaMaximaArray(Alumno* arrayPunteros[],int limite, int* indice)
+{
+	int retorno=-1;
+	int i;
+	int indiceMaximo;
+	float alturaMaxima;
+	int flagOnes = 0;
+
+	if(arrayPunteros != NULL && limite > 0 && indice != NULL)
+	{
+		retorno=0;
+		for(i=0;i<limite;i++)
+		{
+			if(arrayPunteros[i] != NULL)
+			{
+				if(!flagOnes)
+				{
+					indiceMaximo = i;
+					alturaMaxima = arrayPunteros[i]->altura;
+					flagOnes = 1;
+				}
+				else if(arrayPunteros[i]->altura > alturaMaxima)
+				{
+					indiceMaximo = i;
+					alturaMaxima = arrayPunteros[i]->altura;
+				}
+			}
+		}
+		*indice = indiceMaximo;
+
+	}
+	return retorno;
+}
+
+
+
+
+
+
+
+
+

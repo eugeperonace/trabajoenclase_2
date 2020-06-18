@@ -1,0 +1,9 @@
+18:14:58 **** Incremental Build of configuration Debug for project tpractico4 ****
+Info: Internal Builder is used for build
+gcc -o tpractico4.exe "src\\LinkedList.o" "src\\main.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\main.o: in function `main':
+C:\Users\soyde\Desktop\trabajoenclase_22\tpractico4\Debug/../src/main.c:29: undefined reference to `startTesting'
+collect2.exe: error: ld returned 1 exit status
+
+18:14:58 Build Failed. 2 errors, 0 warnings. (took 330ms)
+

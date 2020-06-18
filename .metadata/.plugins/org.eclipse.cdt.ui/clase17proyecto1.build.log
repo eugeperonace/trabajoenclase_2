@@ -1,0 +1,11 @@
+16:40:21 **** Incremental Build of configuration Debug for project clase17proyecto1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Informes.o" "..\\src\\Informes.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn.o" "..\\src\\utn.c" 
+..\src\utn.c:4:10: fatal error: stdio_ext.h: No such file or directory
+    4 | #include <stdio_ext.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+
+16:40:22 Build Failed. 1 errors, 0 warnings. (took 925ms)
+

@@ -14,6 +14,9 @@
  * 5 Imprimir
  * 6 Informe promedio alturas
  * 7 Informe alumno mas alto
+ *
+ *
+ * 10 salir
  **/
 
 
@@ -21,59 +24,87 @@ int main(void)
 {
 	setbuf(stdout,NULL);
 	Alumno* arrayPunterosAlumno[QTY_ALUMNOS];
-	int opcionMenu;
-
+	int opcion;
+	int proximoId = 0;
+	float bufferAltura;
+	char bufferNombre[NOMBRE_LEN];
+	int bufferId;
+	int bufferIndice;
+	float auxiliarAlturaPromedio;
 	if(!alumno_initArray(arrayPunterosAlumno,QTY_ALUMNOS))
 	{
-			printf("INIT OK.");
-	}
-
-	do
-	{
-		if(!utn_getNumero(	&opcionMenu,
-							"\n\nElija una opción:\n"
-							"\n1) Alta de alumno."
-							"\n2) Baja de alumno."
-							"\n3) Modificar alumno."
-							"\n4) Ordenar por nombre."
-							"\n5) Imprimir."
-							"\n6) Informe promedio de alturas."
-							"\n7) Informe alumno más alto."
-
-							"\n8)Salir\n\n",
-
-							"\nError opción inválida",1,8,2) )
+		printf("INIT OK");
+		// SOLO PARA TEST
+		alumno_agregarAlumnoArray(arrayPunterosAlumno,QTY_ALUMNOS,"BBBBBB",1,0);
+		alumno_agregarAlumnoArray(arrayPunterosAlumno,QTY_ALUMNOS,"AAAAAA",2,1);
+		alumno_agregarAlumnoArray(arrayPunterosAlumno,QTY_ALUMNOS,"CCCCCC",3,2);
+		proximoId = 3;
+		// SOLO PARA TEST
+		do
 		{
-			switch(opcionMenu)
+			utn_getNumero(&opcion,"\n1-Alta\n2-Baja\n3-Modificacion\n4-Ordenar\n5-Imprimir\n6-Promedio de alturas\n7-Alumno mas alto\n10-Salir","\nOpcion invalida",1,10,2);
+			switch(opcion)
 			{
-			case 1:
-				if(alumno_agregarAlumnoArray(arrayPunterosAlumno,QTY_ALUMNOS,"MARIA",1.85,111) >= 0)
-				{
-					printf("Alta OK.\n");
-				}
-
-				break;
-
-			case 2:
-				if(!alumno_borrarPorIdArray(arrayPunterosAlumno,QTY_ALUMNOS,111))
-				{
-					printf("\nBORRADO OK");
-				}
-				break;
-			case 3:
-				if(!alumno_modificarArray(arrayPunterosAlumno,QTY_ALUMNOS,1))
-				{
-					printf("Alumno modificado con éxito");
-				}
-				break;
-			case 4:
-				break;
-			case 5:
-				alumno_imprimirArray(arrayPunterosAlumno,QTY_ALUMNOS);
-				break;
+				case 1:
+					if(	!utn_getNombre(bufferNombre,NOMBRE_LEN,"\nNombre?","\nNombre invalido",2) &&
+						!utn_getNumeroFlotante(&bufferAltura,"\nAltura?","\nAltura incorrecta",0.10,4,2) &&
+						alumno_agregarAlumnoArray(arrayPunterosAlumno,QTY_ALUMNOS,bufferNombre,bufferAltura,proximoId) >= 0)
+					{
+						printf("\nAlta OK");
+						proximoId++;
+					}
+					break;
+				case 2:
+					alumno_imprimirArray(arrayPunterosAlumno,QTY_ALUMNOS);
+					if(	!utn_getNumero(&bufferId,"\nId?","\nId invalido",0,10000,2) &&
+						!alumno_borrarPorIdArray(arrayPunterosAlumno,QTY_ALUMNOS,bufferId))
+					{
+						printf("\n Baja ok");
+					}
+					else
+					{
+						printf("\nEl ID: %d no fue encontrado",bufferId);
+					}
+					break;
+				case 3:
+					alumno_imprimirArray(arrayPunterosAlumno,QTY_ALUMNOS);
+					if(!utn_getNumero(&bufferId,"\nId?","\nId invalido",0,10000,2) )
+					{
+						bufferIndice = alumno_buscarPorIdArray(arrayPunterosAlumno,QTY_ALUMNOS,bufferId);
+						if(bufferIndice >= 0)
+						{
+							if(	!utn_getNombre(bufferNombre,NOMBRE_LEN,"\nNombre?","\nNombre invalido",2) &&
+								!utn_getNumeroFlotante(&bufferAltura,"\nAltura?","\nAltura incorrecta",0.10,4,2))
+							{
+								alumno_setNombre(arrayPunterosAlumno[bufferIndice],bufferNombre);
+								alumno_setAltura(arrayPunterosAlumno[bufferIndice],bufferAltura);
+							}
+						}
+						else
+						{
+							printf("\nEl ID: %d no fue encontrado",bufferId);
+						}
+					}
+					break;
+				case 4:
+					alumno_ordenarArray(arrayPunterosAlumno,QTY_ALUMNOS);
+					alumno_imprimirArray(arrayPunterosAlumno,QTY_ALUMNOS);
+					break;
+				case 5:
+					alumno_imprimirArray(arrayPunterosAlumno,QTY_ALUMNOS);
+					break;
+				case 6:
+					alumno_calcularAlturaPromedioArray(arrayPunterosAlumno,QTY_ALUMNOS,&auxiliarAlturaPromedio);
+					printf("\nLa altura promedio es %.2f",auxiliarAlturaPromedio);
+					break;
+				case 7:
+					alumno_calcularAlturaMaximaArray(arrayPunterosAlumno,QTY_ALUMNOS,&bufferIndice);
+					alumno_getNombre(arrayPunterosAlumno[bufferIndice],bufferNombre);
+					alumno_getAltura(arrayPunterosAlumno[bufferIndice],&bufferAltura);
+					printf("\nEl alumno mas alto es %s y mide %.2f",bufferNombre,bufferAltura);
+					break;
 			}
-		}
-	}while (opcionMenu != 8);
-
+		}while(opcion != 10);
+	}
 	return 0;
 }

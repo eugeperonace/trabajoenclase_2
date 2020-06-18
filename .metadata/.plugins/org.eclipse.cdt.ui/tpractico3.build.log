@@ -1,0 +1,11 @@
+12:05:39 **** Incremental Build of configuration Debug for project tpractico3 ****
+Info: Internal Builder is used for build
+gcc -o tpractico3.exe "src\\Controller.o" "src\\Employee.o" "src\\main.o" "src\\parser.o" "src\\utn.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\main.o: in function `main':
+C:\Users\soyde\Desktop\trabajoenclase_22\tpractico3\Debug/../src/main.c:28: undefined reference to `ll_newLinkedList'
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: src\parser.o: in function `parser_EmployeeFromText':
+C:\Users\soyde\Desktop\trabajoenclase_22\tpractico3\Debug/../src/parser.c:32: undefined reference to `ll_add'
+collect2.exe: error: ld returned 1 exit status
+
+12:05:40 Build Failed. 4 errors, 0 warnings. (took 901ms)
+
